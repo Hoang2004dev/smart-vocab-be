@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_vocab
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+
+jwt:
+  secret: TrZJ4Wv6uUdmnKpsWbhkmCRxjYEXjO4vKsW6EdbYw9up9mxH8gM3Go3X5pdD2B196xertQxNzi9ZzFQF5nbSBg==
+  expiration:
+    access: 900000  # 15 phút (ms)
+    refresh: 604800000  # 7 ngày (ms)
