@@ -63,6 +63,8 @@ public class AuthController {
         authService.revokeAllRefreshTokens(userId);
         return ResponseEntity.ok().build();
     }
+
+    // fake commit OK
 }
 
 
