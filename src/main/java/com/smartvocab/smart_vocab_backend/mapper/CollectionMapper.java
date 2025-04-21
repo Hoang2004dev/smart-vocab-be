@@ -8,6 +8,7 @@ import com.smartvocab.smart_vocab_backend.dto.tag.TagResponse;
 import com.smartvocab.smart_vocab_backend.dto.vocab.VocabularyResponse;
 import com.smartvocab.smart_vocab_backend.entity.Collection;
 import com.smartvocab.smart_vocab_backend.entity.CollectionTag;
+import com.smartvocab.smart_vocab_backend.entity.Vocabulary;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -21,17 +22,17 @@ import java.util.stream.Collectors;
 })
 public interface CollectionMapper {
     @Mapping(source = "user", target = "user")
-    @Mapping(target = "vocabularies", expression = "java(mapVocabularies(collection.getCollectionVocabularies()))")
+    @Mapping(target = "vocabularies", expression = "java(mapVocabularies(collection.getVocabularies()))")
     @Mapping(target = "tags", expression = "java(mapTags(collection.getCollectionTags()))")
     CollectionResponse toDto(Collection collection);
 
-    // Custom mapping methods
-    default Set<VocabularyResponse> mapVocabularies(Set<CollectionVocabulary> collectionVocabularies) {
-        if (collectionVocabularies == null) return null;
-        return collectionVocabularies.stream()
-                .map(cv -> VocabularyMapper.INSTANCE.toDto(cv.getVocabulary()))
-                .collect(Collectors.toSet());
+    default List<VocabularyResponse> mapVocabularies(List<Vocabulary> vocabularies) {
+        return vocabularies.stream()
+                .map(this::mapVocabulary)
+                .collect(Collectors.toList());
     }
+
+    VocabularyResponse mapVocabulary(Vocabulary vocab); // nếu dùng MapStruct để ánh xạ vocab -> dto
 
     default Set<TagResponse> mapTags(Set<CollectionTag> collectionTags) {
         if (collectionTags == null) return null;

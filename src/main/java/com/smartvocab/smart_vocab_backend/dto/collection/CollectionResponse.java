@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class CollectionResponse {
 
     private LocalDateTime updatedAt;
 
-    private Set<VocabularyResponse> vocabularies;
+    private List<VocabularyResponse> vocabularies;
 
     private Set<TagResponse> tags;
 }
