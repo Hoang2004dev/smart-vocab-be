@@ -61,6 +61,14 @@ public class TagService {
         tagRepository.deleteById(id);
     }
 
+    public void deleteTag2(UUID id) {
+        if (!tagRepository.existsById(id)) {
+            throw new EntityNotFoundException("Tag not found");
+        }
+
+        tagRepository.deleteById(id);
+    }
+
     public List<TagResponse> getUserTags() {
         User currentUser = authenticatedUserProvider.getCurrentUser();
 
